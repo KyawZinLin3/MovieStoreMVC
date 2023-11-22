@@ -12,7 +12,7 @@ builder.Services.AddControllersWithViews();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IUserAuthenticationServices, UserAuthenticationService>();
-//builder.Services.AddScoped<IGenreService, GenreService>();
+builder.Services.AddScoped<IGenreServices, GenreService>();
 //builder.Services.AddScoped<IFileService, FileService>();
 //builder.Services.AddScoped<IMovieService, MovieService>();
 
