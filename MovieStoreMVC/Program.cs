@@ -13,8 +13,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IUserAuthenticationServices, UserAuthenticationService>();
 builder.Services.AddScoped<IGenreServices, GenreService>();
-//builder.Services.AddScoped<IFileService, FileService>();
-//builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IFileServices, FileService>();
+builder.Services.AddScoped<IMovieServices, MovieService>();
 
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("conn")));
 
