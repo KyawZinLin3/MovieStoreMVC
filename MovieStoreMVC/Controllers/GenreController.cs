@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MovieStoreMVC.Models.Domain;
 using MovieStoreMVC.Repositories.Abstract;
 using MovieStoreMVC.Repositories.Implementation;
 
 namespace MovieStoreMVC.Controllers
 {
+    //[Authorize]
     public class GenreController : Controller
     {
         private readonly IGenreServices _genreService;

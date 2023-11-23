@@ -78,7 +78,7 @@ namespace MovieStoreMVC.Repositories.Implementation
                 return status;
             }
 
-            var signInResult = await signInManager.PasswordSignInAsync(user, model.Password, true, true);
+            var signInResult = await signInManager.PasswordSignInAsync(user, model.Password,true, true);
             if (signInResult.Succeeded)
             {
                 var userRoles = await userManager.GetRolesAsync(user);
