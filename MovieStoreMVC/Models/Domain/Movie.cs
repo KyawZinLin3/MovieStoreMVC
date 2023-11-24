@@ -14,17 +14,21 @@ namespace MovieStoreMVC.Models.Domain
 
         public string? MovieImage { get; set; }
 
-        public string? Cast { get; set; }
+        [Required] public string? Cast { get; set; }
 
-        public string? Director { get; set; }
+        [Required] public string? Director { get; set; }
 
         [NotMapped]
-        [Required]
         public IFormFile ImageFile { get; set; }
         [NotMapped]
         [Required]
         public List<int> Genres { get; set; }
-        public IEnumerable<SelectListItem> GenreList;
+
+        [NotMapped]
+        public IEnumerable<SelectListItem> GenreList { get; set; }
+
+        [NotMapped]
+        public string GenreNames { get; set; }
 
 
     }

@@ -8,7 +8,7 @@
 
     @* Title *@
     <div class="input-container">
-        <label asp-for="Title" class="w-40">GenreName</label>
+        <label asp-for="Title" class="w-40">Title</label>
         <input type="text" class="input" asp-for="Title">
     </div>
     <div class="message-box pd-x-28 error">
@@ -31,9 +31,7 @@
     <div class="input-container">
         <label asp-for="Genres" class="w-40">Genre</label>
         <select asp-items="Model.GenreList" class="input" asp-for="Genres" multiple>
-            <option value="">
-                ----select-----
-            </option>
+            <option value="">--select--</option>
         </select>
     </div>
     <div class="message-box pd-x-28 error">
