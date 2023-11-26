@@ -1,7 +1,9 @@
 ﻿using MovieStoreMVC.Models.Domain;
 using MovieStoreMVC.Models.DTO;
 using MovieStoreMVC.Repositories.Abstract;
+using System;
 using System.Linq.Expressions;
+using System.Security.Principal;
 
 namespace MovieStoreMVC.Repositories.Implementation
 {
@@ -92,6 +94,15 @@ namespace MovieStoreMVC.Repositories.Implementation
             try
             {
                 ctx.Movie.Update(model);
+                foreach(int genId in model.Genres)
+                {
+                    var movieGenre = ctx.MovieGenre.FirstOrDefault(a => a.MovieId == model.Id && a.GenreId == genId);
+                    if(movieGenre == null)
+                    {
+                        movieGenre = new MovieGenre { GenreId = genId, MovieId = model.Id };
+                        ctx.MovieGenre.Add(movieGenre);
+                    }
+                }
                 ctx.SaveChanges();
                 return true;
             }
@@ -99,6 +110,12 @@ namespace MovieStoreMVC.Repositories.Implementation
             {
                 return false;
             }
+        }
+
+        public List<int> GetGenreByMovieByID(int movieID)
+        {
+            var genreIds = ctx.MovieGenre.Where(a=>a.MovieId== movieID).Select(a=>a.GenreId).ToList();
+            return genreIds;
         }
     }
 }

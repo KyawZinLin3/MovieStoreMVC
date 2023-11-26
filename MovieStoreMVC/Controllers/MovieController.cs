@@ -22,14 +22,14 @@ namespace MovieStoreMVC.Controllers
         public IActionResult Add()
         {
             var model = new Movie();
-           // model.GenreList = _genService.List().Select(a => new SelectListItem { Text = a.GenreName, Value = a.Id.ToString() });
+            model.GenreList = _genService.List().Select(a => new SelectListItem { Text = a.GenreName, Value = a.Id.ToString() });
             return View(model);
         }
 
         [HttpPost]
         public IActionResult Add(Movie model)
         {
-           // model.GenreList = _genService.List().Select(a => new SelectListItem { Text = a.GenreName, Value = a.Id.ToString() });
+            model.GenreList = _genService.List().Select(a => new SelectListItem { Text = a.GenreName, Value = a.Id.ToString() });
 
             if (!ModelState.IsValid)
                 return View(model);
@@ -62,14 +62,17 @@ namespace MovieStoreMVC.Controllers
         public IActionResult Edit(int id)
         {
             var model = _movieService.GetByID(id);
-            model.GenreList = _genService.List().Select(a => new SelectListItem { Text = a.GenreName, Value = a.Id.ToString() });
+            var selectedGenres = _movieService.GetGenreByMovieByID(model.Id);
+            MultiSelectList multiGenreList = new MultiSelectList(_genService.List(), "Id", "GenreName", selectedGenres);
+            model.MultiGenreList = multiGenreList;
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Update(Movie model)
+        public IActionResult Edit(Movie model)
         {
-            model.GenreList = _genService.List().Select(a => new SelectListItem { Text = a.GenreName, Value = a.Id.ToString() });
+            var selectedGenres = _movieService.GetGenreByMovieByID(model.Id);
+            MultiSelectList multiGenreList = new MultiSelectList(_genService.List(), "Id", "GenreName", selectedGenres);
             if (!ModelState.IsValid)
                 return View(model);
             if (model.ImageFile != null)
@@ -109,9 +112,8 @@ namespace MovieStoreMVC.Controllers
             
             var result = _movieService.Delete(id);
             return RedirectToAction(nameof(MovieList));
-            
-           
-
         }
+
+
     }
 }
