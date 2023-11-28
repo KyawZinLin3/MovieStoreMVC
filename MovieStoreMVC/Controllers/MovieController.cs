@@ -7,7 +7,7 @@ using MovieStoreMVC.Repositories.Implementation;
 
 namespace MovieStoreMVC.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class MovieController : Controller
     {
         private readonly IMovieServices _movieService ;
@@ -30,18 +30,17 @@ namespace MovieStoreMVC.Controllers
         public IActionResult Add(Movie model)
         {
             model.GenreList = _genService.List().Select(a => new SelectListItem { Text = a.GenreName, Value = a.Id.ToString() });
-
             if (!ModelState.IsValid)
                 return View(model);
             if (model.ImageFile != null)
             {
-                var fileResult = this._fileService.SaveImage(model.ImageFile);
-                if (fileResult.Item1 == 0)
+                var fileReult = this._fileService.SaveImage(model.ImageFile);
+                if (fileReult.Item1 == 0)
                 {
                     TempData["msg"] = "File could not saved";
                     return View(model);
                 }
-                var imageName = fileResult.Item2;
+                var imageName = fileReult.Item2;
                 model.MovieImage = imageName;
             }
             var result = _movieService.Add(model);
@@ -52,10 +51,9 @@ namespace MovieStoreMVC.Controllers
             }
             else
             {
-                TempData["msg"] = "Added Failed";
+                TempData["msg"] = "Error on server side";
                 return View(model);
             }
-            
         }
 
         //Edit Movie

@@ -1,4 +1,4 @@
-﻿
+﻿@model MovieStoreMVC.Models.DTO.MovieListVm
 
 <section class="search-bar">
     <form>
@@ -7,146 +7,20 @@
     </form>
 </section>
 <section class="movies">
-    <div class="movie-card" onclick="window.location.href='/movie-detail.html'">
+    @foreach(var movie in Model.MovieList){
+    <div class="movie-card" onclick="window.location.href='/Home/MovieDetail?movieId=@movie.Id'">
         <div class="movie-image">
-            <img src="https://picsum.photos/id/1/200/300">
+            <img src="/Uploads/@movie.MovieImage">
         </div>
         <div class="movie-info">
-            <h4>Movie 1</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
+            <h4>@movie.Title</h4>
+            <h4>@movie.GenreNames</h4>
+           @*  <h4>Cast : @movie.Cast</h4>
+            <h4>Director : @movie.Director</h4> *@
         </div>
     </div>
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 3</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max,anna, ralph, dorian </h4>
-            <h4>director 1,director 2,director 3</h4>
-        </div>
-    </div>
-
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
+    }
+   
 </section>
 
 <div class="pagination">
