@@ -1,8 +1,8 @@
 ﻿@model MovieStoreMVC.Models.DTO.MovieListVm
 
 <section class="search-bar">
-    <form>
-        <input type="text" placeholder="search here">
+    <form method="get" asp-action="Index">
+        <input type="text" name="term" placeholder="search here">
         <button type="submit"><i class="fa fa-search"></i></button>
     </form>
 </section>

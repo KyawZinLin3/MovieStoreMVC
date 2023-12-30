@@ -71,9 +71,14 @@ namespace MovieStoreMVC.Repositories.Implementation
             return ctx.Movie.Find(id);
         }
 
-        public MovieListVm List()
+        public MovieListVm List(string term="")
         {
            var list =ctx.Movie.ToList() ;
+            if (!string.IsNullOrEmpty(term))
+            {
+                term = term.ToLower() ;
+                list = list.Where(a=>a.Title.ToLower().StartsWith(term)).ToList() ;
+            }
             foreach (var movie in list)
             {
                 var genres = (from genre in ctx.Genre join mg in ctx.MovieGenre on genre.Id equals 

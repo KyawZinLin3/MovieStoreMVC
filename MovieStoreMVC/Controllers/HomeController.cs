@@ -11,9 +11,9 @@ namespace MovieStoreMVC.Controllers
         {
             this._movieService = movieServices;
         }
-        public IActionResult Index()
+        public IActionResult Index(string term="")
         {
-            var movies = _movieService.List(); 
+            var movies = _movieService.List(term); 
             return View(movies);
         }
         public IActionResult About()
