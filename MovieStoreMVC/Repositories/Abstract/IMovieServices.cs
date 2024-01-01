@@ -12,7 +12,7 @@ namespace MovieStoreMVC.Repositories.Abstract
 
         bool Delete(int id);
 
-         MovieListVm List(string term = "");
+         MovieListVm List(string term = "", bool paging = false, int currentPage = 0);
 
         List<int> GetGenreByMovieByID(int movieID);
     }

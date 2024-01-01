@@ -71,13 +71,28 @@ namespace MovieStoreMVC.Repositories.Implementation
             return ctx.Movie.Find(id);
         }
 
-        public MovieListVm List(string term="")
+        public MovieListVm List(string term = "", bool paging = false,int currentPage=0)
         {
-           var list =ctx.Movie.ToList() ;
+            var data = new MovieListVm();
+            var list = ctx.Movie.ToList();
+           
+          
+          
             if (!string.IsNullOrEmpty(term))
             {
                 term = term.ToLower() ;
                 list = list.Where(a=>a.Title.ToLower().StartsWith(term)).ToList() ;
+            }
+            if (paging)
+            {
+                //paging
+                int pageSize = 5;
+                int count = list.Count;
+                int TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+                list = list.Skip((currentPage-1)*pageSize).Take(pageSize).ToList() ;
+                data.PageSize= pageSize;
+                data.CurrentPage = currentPage;
+                data.TotalPages = TotalPages;
             }
             foreach (var movie in list)
             {
@@ -87,10 +102,8 @@ namespace MovieStoreMVC.Repositories.Implementation
                 var genreNames = string.Join(',', genres);
                 movie.GenreNames = genreNames;
             }
-            var data = new MovieListVm
-            {
-                MovieList = list.AsQueryable() 
-            };
+           data.MovieList = list.AsQueryable() ;
+            
             return data;
         }
 
