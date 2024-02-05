@@ -95,7 +95,6 @@ namespace MovieStoreMVC.Controllers
                 TempData["msg"] = "Added Failed";
                 return View(model);
             }
-
         }
 
         public IActionResult MovieList() 
